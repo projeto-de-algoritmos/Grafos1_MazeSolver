@@ -1,0 +1,33 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+#app {
+    width: 80%;
+    margin: 0 auto;
+}
+
+#maze-container {
+    display: inline-block;
+    margin-top: 20px;
+}
+
+.cell {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 1px solid black;
+}
+
+.cell.start {
+    background-color: blue;
+}
+
+.cell.end {
+    background-color: red;
+}
+
+.cell.path {
+    background-color: green;
+}
