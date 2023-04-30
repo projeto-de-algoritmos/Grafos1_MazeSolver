@@ -24,12 +24,18 @@ function renderMaze(maze, start, end) {
                 cell.classList.add('end');
             }
 
+            cell.addEventListener('click', () => {
+                maze[y][x] = maze[y][x] === 1 ? 0 : 1;
+                renderMaze(maze, start, end);
+            });
+
             mazeContainer.appendChild(cell);
         }
 
         mazeContainer.appendChild(document.createElement('br'));
     }
 }
+
 
 function renderPath(path) {
     if (!path) {
