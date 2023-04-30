@@ -1,34 +1,34 @@
 import numpy as np
 from collections import deque
-from random import shuffle
-
+import random
 
 def generate_maze(size):
+    def in_bounds(x, y):
+        return 0 <= x < size and 0 <= y < size
+
+    def recursive_backtracker(x, y):
+        maze[y, x] = 0
+        random.shuffle(directions)
+
+        for dx, dy in directions:
+            nx, ny = x + 2 * dx, y + 2 * dy
+
+            if in_bounds(nx, ny) and maze[ny, nx] == 1:
+                maze[y + dy, x + dx] = 0
+                recursive_backtracker(nx, ny)
+
+    directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
     maze = np.ones((size, size), dtype=int)
-    maze[1::2, 1::2] = 0
-
-    for y in range(1, size - 1, 2):
-        for x in range(1, size - 1, 2):
-            directions = [(0, 2), (2, 0), (0, -2), (-2, 0)]
-            shuffle(directions)
-
-            for dx, dy in directions:
-                nx, ny = x + dx, y + dy
-                if 0 < nx < size - 1 and 0 < ny < size - 1:
-                    if maze[ny, nx] == 1:
-                        maze[y + dy // 2, x + dx // 2] = 0
-                        maze[ny, nx] = 0
-                        break
 
     start = (0, 1)
     end = (size - 1, size - 2)
+
+    recursive_backtracker(1, 1)
 
     maze[start] = 0
     maze[end] = 0
 
     return start, end, maze
-
-
 
 
 def bfs(maze, start, end):
