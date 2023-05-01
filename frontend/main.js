@@ -39,7 +39,7 @@ function renderMaze(maze, start, end) {
 
 function renderPath(path) {
     if (!path) {
-        alert('No path found!');
+        alert('Não tem Solução!');
         return;
     }
 
@@ -83,5 +83,3 @@ generateMazeButton.addEventListener('click', async () => {
     const { maze, start, end } = await generateMaze();
     solveMazeButton.onclick = () => solveMaze(maze, start, end);
 });
-
-generateMaze();

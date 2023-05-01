@@ -3,6 +3,7 @@ from flask_cors import CORS
 import numpy as np
 from lab import generate_maze, bfs
 
+
 app = Flask(__name__)
 CORS(app)
 
@@ -21,4 +22,7 @@ def solve():
     return jsonify({'path': path})
 
 if __name__ == '__main__':
-    app.run()
+    import webbrowser
+
+    webbrowser.open_new("http://localhost:3000")
+    app.run(host='localhost')
